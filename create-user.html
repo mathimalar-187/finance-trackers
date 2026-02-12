@@ -68,6 +68,65 @@
         .back-link:hover {
             text-decoration: underline;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .create-user-container {
+                margin: 20px auto;
+                padding: 1.5rem;
+                max-width: 100%;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-group input, .form-group select {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+
+            .btn-primary {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .create-user-container {
+                margin: 10px;
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .form-group input, .form-group select {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-primary {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .back-link {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>

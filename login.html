@@ -113,6 +113,62 @@
             border-radius: 5px;
             display: none;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                padding: 1.5rem;
+                max-width: 100%;
+                margin: 0 1rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .test-credentials {
+                font-size: 0.85em;
+                padding: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .login-container {
+                padding: 1rem;
+                margin: 0 0.5rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .login-header p {
+                font-size: 0.9rem;
+            }
+
+            .test-credentials {
+                font-size: 0.8em;
+                padding: 0.5rem;
+            }
+
+            .form-group input {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+
+            .login-btn {
+                padding: 0.6rem;
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 <body>
