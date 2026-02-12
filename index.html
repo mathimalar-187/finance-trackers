@@ -476,12 +476,15 @@
                 width: 100%;
                 border-collapse: collapse;
                 font-size: 0.75rem;
-                min-width: 500px;
+                /* Allow the table to shrink to fit small screens instead of forcing horizontal scroll */
+                min-width: 100%;
             }
 
             table th, table td {
                 padding: 8px 5px;
                 min-width: 70px;
+                /* Let text wrap on very small screens so the action bar stays visible */
+                white-space: normal;
             }
 
             table th:first-child, table td:first-child {
@@ -495,10 +498,12 @@
             table th:last-child, table td:last-child {
                 min-width: 100px;
                 text-align: center;
-                position: sticky;
-                right: 0;
+                /* On very small screens, remove sticky positioning so the action column
+                   doesn't overlap other columns and remains readable when wrapped */
+                position: static;
+                right: auto;
                 background: white;
-                box-shadow: -2px 0 4px rgba(0,0,0,0.05);
+                box-shadow: none;
             }
 
             table thead th:last-child {
@@ -508,7 +513,9 @@
             .action-btns {
                 display: inline-flex;
                 gap: 3px;
-                flex-wrap: nowrap;
+                /* Allow edit/delete buttons to wrap if needed on small screens */
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .edit-btn, .delete-btn {
