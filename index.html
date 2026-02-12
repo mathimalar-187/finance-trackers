@@ -271,8 +271,8 @@
         }
 
         .action-btns {
-            display: flex;
-            gap: 8px;
+            display: inline-flex;
+            gap: 6px;
             align-items: center;
             justify-content: center;
         }
@@ -281,10 +281,15 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 8px 10px;
+            border-radius: 6px;
             transition: all 0.2s;
             font-size: 1.1rem;
+            min-width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .edit-btn { 
             color: var(--primary-color);
@@ -409,24 +414,32 @@
             }
 
             table th:last-child, table td:last-child {
-                min-width: 100px;
+                min-width: 110px;
                 text-align: center;
+                position: sticky;
+                right: 0;
+                background: white;
+            }
+
+            table thead th:last-child {
+                background-color: #f8f9fa;
             }
 
             .action-btns {
-                flex-direction: row;
-                justify-content: center;
-                gap: 5px;
+                display: inline-flex;
+                gap: 4px;
                 flex-wrap: nowrap;
             }
 
             .edit-btn, .delete-btn {
-                padding: 10px;
-                font-size: 1.1rem;
-                min-width: 40px;
-                display: flex;
+                padding: 8px 10px;
+                font-size: 1rem;
+                min-width: 38px;
+                height: 38px;
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
+                border-radius: 6px;
             }
         }
 
@@ -476,14 +489,33 @@
             }
 
             table th:last-child, table td:last-child {
-                min-width: 90px;
+                min-width: 100px;
                 text-align: center;
+                position: sticky;
+                right: 0;
+                background: white;
+                box-shadow: -2px 0 4px rgba(0,0,0,0.05);
+            }
+
+            table thead th:last-child {
+                background-color: #f8f9fa;
+            }
+
+            .action-btns {
+                display: inline-flex;
+                gap: 3px;
+                flex-wrap: nowrap;
             }
 
             .edit-btn, .delete-btn {
-                padding: 8px;
-                font-size: 1rem;
-                min-width: 36px;
+                padding: 6px 8px;
+                font-size: 0.95rem;
+                min-width: 34px;
+                height: 34px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
             }
 
             .btn {

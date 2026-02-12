@@ -9,8 +9,8 @@ function checkAuth() {
 }
 
 function Header() {
-  const userType = sessionStorage.getItem('userType') || 'user' || 'final';
-  const username = sessionStorage.getItem('username') || 'User'|| 'final';
+  const userType = sessionStorage.getItem('userType') || 'user';
+  const username = sessionStorage.getItem('username') || 'User';
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -25,13 +25,9 @@ function Header() {
     <header>
       <h1><i className="fas fa-wallet"></i> Personal Finance Tracker</h1>
       <div className="user-info">
-        <span style={{marginRight: '15px', fontWeight: '500', padding: '8px 15px', backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: '20px'}}>
-          {username} ({userType})
-        </span>
+        <span id="user-role">{username} ({userType})</span>
         {(userType === 'admin' || userType === 'manager' || userType === 'final') && (
-          <button onClick={handleCreateUser} className="btn" style={{marginRight: '10px'}}>
-            Create User
-          </button>
+          <button onClick={handleCreateUser} id="create-user-btn" className="btn">Create User</button>
         )}
         <button onClick={handleLogout} className="btn logout-btn">Logout</button>
       </div>
