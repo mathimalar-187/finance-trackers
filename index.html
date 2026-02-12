@@ -228,9 +228,17 @@
             color: var(--primary-color);
         }
 
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 600px;
         }
 
         table thead {
@@ -360,21 +368,40 @@
                 flex-direction: column;
             }
 
+            .table-wrapper {
+                margin: 0 -20px;
+                padding: 0 20px;
+                border-radius: 0;
+            }
+
             table {
-                display: block;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
                 font-size: 0.85rem;
+                min-width: 550px;
             }
 
             table th, table td {
                 padding: 10px 8px;
                 white-space: nowrap;
+                min-width: 80px;
+            }
+
+            table th:first-child, table td:first-child {
+                min-width: 90px;
+            }
+
+            table th:nth-child(2), table td:nth-child(2) {
+                min-width: 120px;
             }
 
             .action-btns {
                 flex-direction: row;
                 justify-content: center;
+                gap: 8px;
+            }
+
+            .edit-btn, .delete-btn {
+                padding: 8px 12px;
+                font-size: 1rem;
             }
         }
 
@@ -400,12 +427,32 @@
                 font-size: 0.95rem;
             }
 
+            .table-wrapper {
+                margin: 0 -15px;
+                padding: 0 15px;
+            }
+
             table {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                min-width: 500px;
             }
 
             table th, table td {
                 padding: 8px 5px;
+                min-width: 70px;
+            }
+
+            table th:first-child, table td:first-child {
+                min-width: 80px;
+            }
+
+            table th:nth-child(2), table td:nth-child(2) {
+                min-width: 100px;
+            }
+
+            .edit-btn, .delete-btn {
+                padding: 6px 10px;
+                font-size: 0.9rem;
             }
 
             .btn {
@@ -670,39 +717,41 @@
                         <div className="transaction-history">
                             <h2><i className="fas fa-history"></i> Transaction History</h2>
                             {transactions.length > 0 ? (
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Amount</th>
-                                            <th>Type</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).map(transaction => (
-                                            <tr key={transaction.id}>
-                                                <td>{transaction.date}</td>
-                                                <td>{transaction.description}</td>
-                                                <td className={transaction.type}>
-                                                    {transaction.type === 'expense' ? '-' : '+'}${transaction.amount}
-                                                </td>
-                                                <td>{transaction.type}</td>
-                                                <td>
-                                                    <div className="action-btns">
-                                                        <button className="edit-btn" onClick={() => handleEdit(transaction)}>
-                                                            <i className="fas fa-edit"></i>
-                                                        </button>
-                                                        <button className="delete-btn" onClick={() => handleDelete(transaction.id)}>
-                                                            <i className="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                <div className="table-wrapper">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                                <th>Type</th>
+                                                <th>Actions</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            {transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).map(transaction => (
+                                                <tr key={transaction.id}>
+                                                    <td>{transaction.date}</td>
+                                                    <td>{transaction.description}</td>
+                                                    <td className={transaction.type}>
+                                                        {transaction.type === 'expense' ? '-' : '+'}${transaction.amount}
+                                                    </td>
+                                                    <td>{transaction.type}</td>
+                                                    <td>
+                                                        <div className="action-btns">
+                                                            <button className="edit-btn" onClick={() => handleEdit(transaction)}>
+                                                                <i className="fas fa-edit"></i>
+                                                            </button>
+                                                            <button className="delete-btn" onClick={() => handleDelete(transaction.id)}>
+                                                                <i className="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             ) : (
                                 <div className="empty-state">
                                     <i className="fas fa-inbox"></i>
