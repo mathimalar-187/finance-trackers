@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --success-color: #06ffa5;
+            --danger-color: #ff006e;
+            --dark-color: #2b2d42;
+            --gray-color: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #7b2ff7, #c77dff);
+            color: var(--dark-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+        }
+
+        header h1 i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        #user-role {
+            margin-right: 15px;
+            font-weight: 500;
+            padding: 8px 15px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 20px;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            background: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: var(--gray-color);
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3 i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+
+        .income-card h3 i {
+            color: var(--success-color);
+        }
+
+        .expense-card h3 i {
+            color: var(--danger-color);
+        }
+
+        .balance-card h3 i {
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .income-card p {
+            color: var(--success-color);
+        }
+
+        .expense-card p {
+            color: var(--danger-color);
+        }
+
+        .balance-card p {
+            color: var(--primary-color);
+        }
+
+        .transaction-form {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .transaction-form h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .transaction-form h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control input,
+        .form-control select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+
+
+        .form-control input:focus,
+        .form-control select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .cancel-btn {
+            background: var(--gray-color) !important;
+        }
+
+        .transaction-history {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .transaction-history h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .transaction-history h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            background-color: #f8f9fa;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark-color);
+            border-bottom: 2px solid #eee;
+        }
+
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+
+
+        .income {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .expense {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .edit-btn { color: var(--primary-color); }
+        .delete-btn { color: var(--danger-color); }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray-color);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                margin-bottom: 15px;
+            }
+
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table th, table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Check authentication
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        const App = () => {
+            const [transactions, setTransactions] = useState([]);
+            const [description, setDescription] = useState('');
+            const [amount, setAmount] = useState('');
+            const [type, setType] = useState('income');
+            const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+            const [isEditing, setIsEditing] = useState(false);
+            const [editId, setEditId] = useState(null);
+            const [userRole, setUserRole] = useState('User');
+            const [currentUserType, setCurrentUserType] = useState('');
+
+            useEffect(() => {
+                // Load transactions from localStorage
+                const savedTransactions = localStorage.getItem('transactions');
+                if (savedTransactions) {
+                    setTransactions(JSON.parse(savedTransactions));
+                }
+
+                // Load user role from sessionStorage
+                const savedRole = sessionStorage.getItem('userType');
+                const username = sessionStorage.getItem('username');
+                if (savedRole && username) {
+                    setUserRole(`${username} (${savedRole})`);
+                    setCurrentUserType(savedRole);
+                }
+            }, []);
+
+            useEffect(() => {
+                // Save transactions to localStorage whenever they change
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+            }, [transactions]);
+
+            const calculateTotal = (type) => {
+                return transactions
+                    .filter(transaction => transaction.type === type)
+                    .reduce((total, transaction) => total + parseFloat(transaction.amount), 0)
+                    .toFixed(2);
+            };
+
+            const calculateBalance = () => {
+                const income = parseFloat(calculateTotal('income'));
+                const expense = parseFloat(calculateTotal('expense'));
+                return (income - expense).toFixed(2);
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                
+                if (!description || !amount) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                if (isEditing) {
+                    // Update existing transaction
+                    setTransactions(transactions.map(transaction => 
+                        transaction.id === editId 
+                            ? { ...transaction, description, amount, type, date }
+                            : transaction
+                    ));
+                    setIsEditing(false);
+                    setEditId(null);
+                } else {
+                    // Add new transaction
+                    const newTransaction = {
+                        id: Date.now(),
+                        description,
+                        amount,
+                        type,
+                        date
+                    };
+                    setTransactions([...transactions, newTransaction]);
+                }
+
+                resetForm();
+            };
+
+            const handleEdit = (transaction) => {
+                // Only admin can edit transactions
+                if (currentUserType !== 'admin') {
+                    alert('Access denied. Only admin can edit transactions.');
+                    return;
+                }
+                setDescription(transaction.description);
+                setAmount(transaction.amount);
+                setType(transaction.type);
+                setDate(transaction.date);
+                setIsEditing(true);
+                setEditId(transaction.id);
+            };
+
+            const handleDelete = (id) => {
+                // Only admin can delete transactions
+                if (currentUserType !== 'admin') {
+                    alert('Access denied. Only admin can delete transactions.');
+                    return;
+                }
+                if (window.confirm('Are you sure you want to delete this transaction?')) {
+                    setTransactions(transactions.filter(transaction => transaction.id !== id));
+                }
+            };
+
+            const resetForm = () => {
+                setDescription('');
+                setAmount('');
+                setType('income');
+                setDate(new Date().toISOString().split('T')[0]);
+                setIsEditing(false);
+                setEditId(null);
+            };
+
+            const handleLogout = () => {
+                sessionStorage.clear();
+                window.location.href = 'login.html';
+            };
+
+            return (
+                <div className="container">
+                    <header>
+                        <h1><i className="fas fa-wallet"></i> Personal Finance Tracker</h1>
+                        <div className="user-info">
+                            <span id="user-role">{userRole}</span>
+                            <button className="btn logout-btn" onClick={handleLogout}>
+                                <i className="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </header>
+
+                    {/* Role-specific welcome message */}
+                    {currentUserType === 'final' && (
+                        <div className="card" style={{marginBottom: '30px', textAlign: 'center'}}>
+                            <h3 style={{color: '#4361ee', marginBottom: '10px'}}>
+                                <i className="fas fa-user-check"></i> Welcome, Final User!
+                            </h3>
+                            <p style={{color: '#6c757d', margin: 0}}>You can add new transactions using the form below.</p>
+                        </div>
+                    )}
+
+                    {/* Summary cards - hidden for 'final' role */}
+                    {currentUserType !== 'final' && (
+                        <div className="summary">
+                            <div className="card income-card">
+                                <h3><i className="fas fa-arrow-up"></i> Total Income</h3>
+                                <p>${calculateTotal('income')}</p>
+                            </div>
+                            <div className="card expense-card">
+                                <h3><i className="fas fa-arrow-down"></i> Total Expenses</h3>
+                                <p>${calculateTotal('expense')}</p>
+                            </div>
+                            <div className="card balance-card">
+                                <h3><i className="fas fa-balance-scale"></i> Balance</h3>
+                                <p>${calculateBalance()}</p>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="transaction-form">
+                        <h2>
+                            <i className="fas fa-plus-circle"></i> 
+                            {currentUserType === 'final' 
+                                ? 'Add New Transaction' 
+                                : (isEditing ? 'Edit Transaction' : 'Add New Transaction')
+                            }
+                        </h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-row">
+                                <div className="form-control">
+                                    <label htmlFor="description">Description</label>
+                                    <input 
+                                        type="text" 
+                                        id="description" 
+                                        value={description} 
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        placeholder="Enter transaction description"
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label htmlFor="amount">Amount</label>
+                                    <input 
+                                        type="number" 
+                                        id="amount" 
+                                        value={amount} 
+                                        onChange={(e) => setAmount(e.target.value)}
+                                        placeholder="0.00"
+                                        step="0.01"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-control">
+                                    <label htmlFor="type">Type</label>
+                                    <select 
+                                        id="type" 
+                                        value={type} 
+                                        onChange={(e) => setType(e.target.value)}
+                                    >
+                                        <option value="income">Income</option>
+                                        <option value="expense">Expense</option>
+                                    </select>
+                                </div>
+                                <div className="form-control">
+                                    <label htmlFor="date">Date</label>
+                                    <input 
+                                        type="date" 
+                                        id="date" 
+                                        value={date} 
+                                        onChange={(e) => setDate(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-buttons">
+                                {isEditing && (
+                                    <button type="button" className="btn cancel-btn" onClick={resetForm}>
+                                        Cancel
+                                    </button>
+                                )}
+                                <button type="submit" className="btn">
+                                    {isEditing ? 'Update' : 'Add Transaction'} →
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* Access control messages for non-admin users */}
+                    {(currentUserType === 'manager' || currentUserType === 'user') && (
+                        <div className="transaction-history">
+                            <h2><i className="fas fa-lock"></i> Transaction History</h2>
+                            <div className="empty-state">
+                                <i className="fas fa-lock" style={{color: '#dc3545'}}></i>
+                                <p>Access Restricted: Only administrators can view transaction history.</p>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Transaction History - only visible to admin */}
+                    {currentUserType === 'admin' && (
+                        <div className="transaction-history">
+                            <h2><i className="fas fa-history"></i> Transaction History</h2>
+                            {transactions.length > 0 ? (
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Type</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).map(transaction => (
+                                            <tr key={transaction.id}>
+                                                <td>{transaction.date}</td>
+                                                <td>{transaction.description}</td>
+                                                <td className={transaction.type}>
+                                                    {transaction.type === 'expense' ? '-' : '+'}${transaction.amount}
+                                                </td>
+                                                <td>{transaction.type}</td>
+                                                <td>
+                                                    <div className="action-btns">
+                                                        <button className="edit-btn" onClick={() => handleEdit(transaction)}>
+                                                            <i className="fas fa-edit"></i>
+                                                        </button>
+                                                        <button className="delete-btn" onClick={() => handleDelete(transaction.id)}>
+                                                            <i className="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="empty-state">
+                                    <i className="fas fa-inbox"></i>
+                                    <p>No transactions yet. Add your first transaction above!</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

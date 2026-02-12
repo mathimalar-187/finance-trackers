@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker Setup</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .card { background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #007bff; }
+        .btn { display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; margin: 5px; }
+        .btn:hover { background: #0056b3; }
+        .success { border-left-color: #28a745; }
+        .warning { border-left-color: #ffc107; }
+    </style>
+</head>
+<body>
+    <h1>Finance Tracker Setup & Testing</h1>
+    
+    <div class="card">
+        <h3>Step 1: Database Setup</h3>
+        <p>Run this to create the database and tables automatically:</p>
+        <a href="setup-db.php" class="btn">Setup Database</a>
+    </div>
+    
+    <div class="card">
+        <h3>Step 2: Test Connection</h3>
+        <p>Verify that everything is working correctly:</p>
+        <a href="test-db.php" class="btn">Test Database</a>
+    </div>
+    
+    <div class="card success">
+        <h3>Step 3: Use the Application</h3>
+        <p>Once setup is complete, access the application:</p>
+        <a href="login.html" class="btn">Login Page</a>
+        <a href="index.html" class="btn">Main App</a>
+    </div>
+    
+    <div class="card warning">
+        <h3>Utilities</h3>
+        <p>Additional tools for development:</p>
+        <a href="generate-hash.php" class="btn">Generate Password Hash</a>
+        <a href="create-user.html" class="btn">Create User (Admin Only)</a>
+    </div>
+    
+    <div class="card">
+        <h3>Default Login Credentials</h3>
+        <p><strong>Username:</strong> admin</p>
+        <p><strong>Password:</strong> admin123</p>
+        <p><strong>Role:</strong> Admin (can create users)</p>
+    </div>
+    <div class="card">
+        <h3>Default Login Credentials</h3>
+        <p><strong>Username:</strong> manager</p>
+        <p><strong>Password:</strong> manager123</p>
+        <p><strong>Role:</strong> manager (can create users)</p>
+    </div>
+    <div class="card">
+        <h3>Default Login Credentials</h3>
+        <p><strong>Username:</strong> final</p>
+        <p><strong>Password:</strong> final123</p>
+        <p><strong>Role:</strong> final (can create users)</p>
+    </div>
+</body>
+</html>

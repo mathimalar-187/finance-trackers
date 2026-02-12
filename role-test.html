@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Access Test - Finance Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .role-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .role-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+        .role-card.admin { border-color: #28a745; }
+        .role-card.manager { border-color: #ffc107; }
+        .role-card.user { border-color: #17a2b8; }
+        .role-card.final { border-color: #dc3545; }
+        
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .role-permissions {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="start.html" class="back-btn">← Back to Start</a>
+        
+        <h1>Role-Based Access Control Test</h1>
+        <p>Click on any role below to test the access permissions:</p>
+        
+        <div class="role-card admin" onclick="testRole('admin')">
+            <div class="role-title">👑 Admin</div>
+            <div class="role-permissions">
+                ✅ View summary cards<br>
+                ✅ Add new transactions<br>
+                ✅ View transaction history<br>
+                ✅ Edit transactions<br>
+                ✅ Delete transactions
+            </div>
+            <button class="test-btn">Test Admin Access</button>
+        </div>
+        
+        <div class="role-card manager" onclick="testRole('manager')">
+            <div class="role-title">👔 Manager</div>
+            <div class="role-permissions">
+                ✅ View summary cards<br>
+                ✅ Add new transactions<br>
+                ❌ Cannot view transaction history<br>
+                ❌ Cannot edit transactions<br>
+                ❌ Cannot delete transactions
+            </div>
+            <button class="test-btn">Test Manager Access</button>
+        </div>
+        
+        <div class="role-card user" onclick="testRole('user')">
+            <div class="role-title">👤 User</div>
+            <div class="role-permissions">
+                ✅ View summary cards<br>
+                ✅ Add new transactions<br>
+                ❌ Cannot view transaction history<br>
+                ❌ Cannot edit transactions<br>
+                ❌ Cannot delete transactions
+            </div>
+            <button class="test-btn">Test User Access</button>
+        </div>
+        
+        <div class="role-card final" onclick="testRole('final')">
+            <div class="role-title">🔒 Final</div>
+            <div class="role-permissions">
+                ❌ Cannot view summary cards<br>
+                ✅ Add new transactions only<br>
+                ❌ Cannot view transaction history<br>
+                ❌ Cannot edit transactions<br>
+                ❌ Cannot delete transactions
+            </div>
+            <button class="test-btn">Test Final Access</button>
+        </div>
+    </div>
+
+    <script>
+        function testRole(role) {
+            // Set session storage to simulate login
+            sessionStorage.setItem('userType', role);
+            sessionStorage.setItem('userId', '1');
+            sessionStorage.setItem('username', role);
+            sessionStorage.setItem('isLoggedIn', 'true');
+            
+            // Redirect to main application
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
