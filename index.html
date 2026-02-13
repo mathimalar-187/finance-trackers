@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -231,105 +232,103 @@
             color: var(--primary-color);
         }
 
-        .table-wrapper {
-            overflow-x: auto;
-            overflow-y: visible;
-            -webkit-overflow-scrolling: touch;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
-            display: block;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            margin: 0;
-            display: table;
-        }
-
-        table thead {
+        .t-header {
+            display: grid;
+            grid-template-columns: 15% 30% 20% 15% 20%;
             background-color: #f8f9fa;
-        }
-
-        table th {
+            border-bottom: 2px solid #eee;
             padding: 15px 10px;
-            text-align: left;
             font-weight: 600;
             color: var(--dark-color);
-            border-bottom: 2px solid #eee;
+            position: sticky;
+            top: 0;
         }
 
-        table th:nth-child(1), table td:nth-child(1) { width: 12%; } /* Date */
-        table th:nth-child(2), table td:nth-child(2) { width: 32%; } /* Description */
-        table th:nth-child(3), table td:nth-child(3) { width: 18%; } /* Amount */
-        table th:nth-child(4), table td:nth-child(4) { width: 18%; } /* Type */
-        table th:nth-child(5), table td:nth-child(5) { width: 20%; } /* Actions */
-
-        table td {
+        .t-row {
+            display: grid;
+            grid-template-columns: 15% 30% 20% 15% 20%;
             padding: 15px 10px;
             border-bottom: 1px solid #eee;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            align-items: center;
+            transition: background 0.2s;
         }
 
-        table td:nth-child(2) {
-            word-break: break-word;
+        .t-row:hover {
+            background-color: #f8f9ff;
         }
 
-        table td:nth-child(5) {
-            text-align: center;
+        .t-cell {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 10px;
         }
 
+        .t-cell.description {
+            font-weight: 500;
+        }
 
+        .t-cell.amount {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
 
-        .income {
-            color: var(--success-color);
+        .badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
-        .expense {
+        .income-badge {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+
+        .expense-badge {
+            background-color: rgba(255, 0, 110, 0.1);
             color: var(--danger-color);
-            font-weight: 600;
         }
 
         .action-btns {
-            display: inline-flex;
-            gap: 6px;
-            align-items: center;
-            justify-content: center;
+            display: flex;
+            gap: 10px;
         }
 
-        .edit-btn, .delete-btn {
+        .edit-btn,
+        .delete-btn {
             background: none;
             border: none;
             cursor: pointer;
-            padding: 8px 10px;
+            padding: 8px;
             border-radius: 6px;
             transition: all 0.2s;
-            font-size: 1.1rem;
-            min-width: 40px;
-            height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
-        .edit-btn { 
+
+        .edit-btn {
             color: var(--primary-color);
         }
+
         .edit-btn:hover {
             background: rgba(67, 97, 238, 0.1);
         }
-        .delete-btn { 
+
+        .delete-btn {
             color: var(--danger-color);
         }
+
         .delete-btn:hover {
             background: rgba(255, 0, 110, 0.1);
         }
+
 
         .empty-state {
             text-align: center;
@@ -348,62 +347,38 @@
         @media (max-width: 768px) {
             body {
                 padding: 10px;
+                background-color: #f4f7fa;
             }
 
             .container {
-                padding: 10px;
+                padding: 0;
+                max-width: 100%;
             }
 
             header {
                 flex-direction: column;
-                text-align: center;
-                padding: 15px;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-
-            header h1 i {
-                font-size: 1.3rem;
-            }
-
-            .user-info {
-                width: 100%;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #user-role {
-                margin-right: 0;
-                width: 100%;
-                text-align: center;
-            }
-
-            .btn, .logout-btn {
-                width: 100%;
+                padding: 20px;
+                border-radius: 0 0 20px 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             }
 
             .summary {
                 grid-template-columns: 1fr;
                 gap: 15px;
+                padding: 0 10px;
             }
 
             .card {
                 padding: 20px;
+                margin-bottom: 0;
+                border: none;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             }
 
-            .card p {
-                font-size: 1.6rem;
-            }
-
-            .transaction-form, .transaction-history {
+            .transaction-form {
+                margin: 20px 10px;
                 padding: 20px;
-            }
-
-            .transaction-form h2, .transaction-history h2 {
-                font-size: 1.3rem;
             }
 
             .form-row {
@@ -415,60 +390,113 @@
                 flex-direction: column;
             }
 
-            .table-wrapper {
-                margin: 0 -20px;
-                padding: 0 20px;
-                border-radius: 0;
-                width: calc(100% + 40px);
+            .transaction-history {
+                padding: 10px;
+                background: transparent;
+                box-shadow: none;
             }
 
-            table {
-                font-size: 0.85rem;
-                table-layout: fixed;
+            .transaction-history h2 {
+                padding: 0 10px;
+                font-size: 1.3rem;
+            }
+
+            .t-header {
+                display: none;
+            }
+
+            .t-body {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .t-row {
+                display: flex;
+                flex-direction: column;
+                background: white;
+                border-radius: 12px;
+                padding: 15px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                border: none;
+                align-items: flex-start;
+                position: relative;
+            }
+
+            .t-cell {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 5px;
+                overflow: visible;
+                white-space: normal;
+            }
+
+            .t-cell.date {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                width: auto;
+                font-size: 0.8rem;
+                color: var(--gray-color);
+                margin: 0;
+            }
+
+            .t-cell.description {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--dark-color);
+                margin-bottom: 10px;
+                padding-right: 90px;
+            }
+
+            .t-cell.type {
+                width: auto;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+
+            .t-cell.amount {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: baseline;
+            }
+
+            .t-cell.amount::before {
+                content: "Amount:";
+                font-size: 0.8rem;
+                color: var(--gray-color);
+                font-weight: 400;
+                margin-right: 10px;
+                font-family: 'Segoe UI', sans-serif;
+            }
+
+            .t-cell.actions {
+                border-top: 1px solid #f0f0f0;
+                padding-top: 12px;
+                margin-top: 5px;
                 width: 100%;
             }
 
-            table th, table td {
-                padding: 10px 8px;
-            }
-
-            table th:nth-child(1), table td:nth-child(1) { width: 18%; } /* Date */
-            table th:nth-child(2), table td:nth-child(2) { width: 28%; } /* Description */
-            table th:nth-child(3), table td:nth-child(3) { width: 18%; } /* Amount */
-            table th:nth-child(4), table td:nth-child(4) { width: 18%; } /* Type */
-            table th:nth-child(5), table td:nth-child(5) { 
-                width: 18%; 
-                text-align: center;
-                position: sticky;
-                right: 0;
-                background: white;
-                box-shadow: -2px 0 4px rgba(0,0,0,0.05);
-            }
-
-            table thead th:last-child {
-                background-color: #f8f9fa;
-            }
-
-            table td:nth-child(2) {
-                white-space: normal;
-                word-break: break-word;
-            }
-
             .action-btns {
-                display: inline-flex;
-                gap: 4px;
-                flex-wrap: nowrap;
+                justify-content: flex-end;
+                width: 100%;
             }
 
-            .edit-btn, .delete-btn {
-                padding: 8px 10px;
-                font-size: 1rem;
-                min-width: 38px;
-                height: 38px;
-                display: inline-flex;
-                align-items: center;
+            .edit-btn,
+            .delete-btn {
+                flex: 1;
+                display: flex;
                 justify-content: center;
-                border-radius: 6px;
+                align-items: center;
+                padding: 10px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+            }
+
+            .edit-btn:hover,
+            .delete-btn:hover {
+                transform: translateY(-2px);
             }
         }
 
@@ -485,70 +513,28 @@
                 font-size: 1.4rem;
             }
 
-            .transaction-form, .transaction-history {
+            .transaction-form,
+            .transaction-history {
                 padding: 15px;
             }
 
-            .form-control input, .form-control select {
+            .form-control input,
+            .form-control select {
                 padding: 10px;
                 font-size: 0.95rem;
             }
 
-            .table-wrapper {
-                margin: 0 -15px;
-                padding: 0 15px;
-                width: calc(100% + 30px);
-                overflow-x: auto;
+            table td {
+                padding: 8px 10px;
+                font-size: 0.8rem;
             }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 0.75rem;
-                table-layout: fixed;
-            }
-
-            table th, table td {
-                padding: 8px 5px;
-            }
-
-            table th:nth-child(1), table td:nth-child(1) { width: 20%; } /* Date */
-            table th:nth-child(2), table td:nth-child(2) { width: 25%; } /* Description */
-            table th:nth-child(3), table td:nth-child(3) { width: 18%; } /* Amount */
-            table th:nth-child(4), table td:nth-child(4) { width: 17%; } /* Type */
-            table th:nth-child(5), table td:nth-child(5) { 
-                width: 20%; 
-                text-align: center;
-                position: sticky;
-                right: 0;
-                background: white;
-                box-shadow: -2px 0 4px rgba(0,0,0,0.05);
-            }
-
-            table thead th:last-child {
-                background-color: #f8f9fa;
-            }
-
-            table td:nth-child(2) {
-                white-space: normal;
-                word-break: break-word;
-            }
-
-            .action-btns {
-                display: inline-flex;
-                gap: 3px;
-                flex-wrap: nowrap;
-            }
-
-            .edit-btn, .delete-btn {
+            .edit-btn,
+            .delete-btn {
                 padding: 6px 8px;
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 min-width: 34px;
                 height: 34px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 5px;
             }
 
             .btn {
@@ -558,6 +544,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
@@ -568,7 +555,6 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Check authentication
         if (!sessionStorage.getItem('isLoggedIn')) {
             window.location.href = 'login.html';
         }
@@ -585,13 +571,11 @@
             const [currentUserType, setCurrentUserType] = useState('');
 
             useEffect(() => {
-                // Load transactions from localStorage
                 const savedTransactions = localStorage.getItem('transactions');
                 if (savedTransactions) {
                     setTransactions(JSON.parse(savedTransactions));
                 }
 
-                // Load user role from sessionStorage
                 const savedRole = sessionStorage.getItem('userType');
                 const username = sessionStorage.getItem('username');
                 if (savedRole && username) {
@@ -601,7 +585,6 @@
             }, []);
 
             useEffect(() => {
-                // Save transactions to localStorage whenever they change
                 localStorage.setItem('transactions', JSON.stringify(transactions));
             }, [transactions]);
 
@@ -620,23 +603,21 @@
 
             const handleSubmit = (e) => {
                 e.preventDefault();
-                
+
                 if (!description || !amount) {
                     alert('Please fill in all fields');
                     return;
                 }
 
                 if (isEditing) {
-                    // Update existing transaction
-                    setTransactions(transactions.map(transaction => 
-                        transaction.id === editId 
+                    setTransactions(transactions.map(transaction =>
+                        transaction.id === editId
                             ? { ...transaction, description, amount, type, date }
                             : transaction
                     ));
                     setIsEditing(false);
                     setEditId(null);
                 } else {
-                    // Add new transaction
                     const newTransaction = {
                         id: Date.now(),
                         description,
@@ -651,7 +632,6 @@
             };
 
             const handleEdit = (transaction) => {
-                // Only admin can edit transactions
                 if (currentUserType !== 'admin') {
                     alert('Access denied. Only admin can edit transactions.');
                     return;
@@ -665,7 +645,6 @@
             };
 
             const handleDelete = (id) => {
-                // Only admin can delete transactions
                 if (currentUserType !== 'admin') {
                     alert('Access denied. Only admin can delete transactions.');
                     return;
@@ -701,17 +680,16 @@
                         </div>
                     </header>
 
-                    {/* Role-specific welcome message */}
+                    
                     {currentUserType === 'final' && (
-                        <div className="card" style={{marginBottom: '30px', textAlign: 'center'}}>
-                            <h3 style={{color: '#4361ee', marginBottom: '10px'}}>
+                        <div className="card" style={{ marginBottom: '30px', textAlign: 'center' }}>
+                            <h3 style={{ color: '#4361ee', marginBottom: '10px' }}>
                                 <i className="fas fa-user-check"></i> Welcome, Final User!
                             </h3>
-                            <p style={{color: '#6c757d', margin: 0}}>You can add new transactions using the form below.</p>
+                            <p style={{ color: '#6c757d', margin: 0 }}>You can add new transactions using the form below.</p>
                         </div>
                     )}
 
-                    {/* Summary cards - hidden for 'final' role */}
                     {currentUserType !== 'final' && (
                         <div className="summary">
                             <div className="card income-card">
@@ -731,9 +709,9 @@
 
                     <div className="transaction-form">
                         <h2>
-                            <i className="fas fa-plus-circle"></i> 
-                            {currentUserType === 'final' 
-                                ? 'Add New Transaction' 
+                            <i className="fas fa-plus-circle"></i>
+                            {currentUserType === 'final'
+                                ? 'Add New Transaction'
                                 : (isEditing ? 'Edit Transaction' : 'Add New Transaction')
                             }
                         </h2>
@@ -741,20 +719,20 @@
                             <div className="form-row">
                                 <div className="form-control">
                                     <label htmlFor="description">Description</label>
-                                    <input 
-                                        type="text" 
-                                        id="description" 
-                                        value={description} 
+                                    <input
+                                        type="text"
+                                        id="description"
+                                        value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Enter transaction description"
                                     />
                                 </div>
                                 <div className="form-control">
                                     <label htmlFor="amount">Amount</label>
-                                    <input 
-                                        type="number" 
-                                        id="amount" 
-                                        value={amount} 
+                                    <input
+                                        type="number"
+                                        id="amount"
+                                        value={amount}
                                         onChange={(e) => setAmount(e.target.value)}
                                         placeholder="0.00"
                                         step="0.01"
@@ -765,9 +743,9 @@
                             <div className="form-row">
                                 <div className="form-control">
                                     <label htmlFor="type">Type</label>
-                                    <select 
-                                        id="type" 
-                                        value={type} 
+                                    <select
+                                        id="type"
+                                        value={type}
                                         onChange={(e) => setType(e.target.value)}
                                     >
                                         <option value="income">Income</option>
@@ -776,10 +754,10 @@
                                 </div>
                                 <div className="form-control">
                                     <label htmlFor="date">Date</label>
-                                    <input 
-                                        type="date" 
-                                        id="date" 
-                                        value={date} 
+                                    <input
+                                        type="date"
+                                        id="date"
+                                        value={date}
                                         onChange={(e) => setDate(e.target.value)}
                                     />
                                 </div>
@@ -797,43 +775,44 @@
                         </form>
                     </div>
 
-                    {/* Access control messages for non-admin users */}
+                   
                     {(currentUserType === 'manager' || currentUserType === 'user') && (
                         <div className="transaction-history">
                             <h2><i className="fas fa-lock"></i> Transaction History</h2>
                             <div className="empty-state">
-                                <i className="fas fa-lock" style={{color: '#dc3545'}}></i>
+                                <i className="fas fa-lock" style={{ color: '#dc3545' }}></i>
                                 <p>Access Restricted: Only administrators can view transaction history.</p>
                             </div>
                         </div>
                     )}
 
-                    {/* Transaction History - only visible to admin */}
                     {currentUserType === 'admin' && (
                         <div className="transaction-history">
                             <h2><i className="fas fa-history"></i> Transaction History</h2>
                             {transactions.length > 0 ? (
                                 <div className="table-wrapper">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Description</th>
-                                                <th>Amount</th>
-                                                <th>Type</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div className="transaction-list">
+                                        <div className="t-header">
+                                            <div className="t-cell">Date</div>
+                                            <div className="t-cell">Description</div>
+                                            <div className="t-cell">Amount</div>
+                                            <div className="t-cell">Type</div>
+                                            <div className="t-cell">Actions</div>
+                                        </div>
+                                        <div className="t-body">
                                             {transactions.sort((a, b) => new Date(b.date) - new Date(a.date)).map(transaction => (
-                                                <tr key={transaction.id}>
-                                                    <td>{transaction.date}</td>
-                                                    <td>{transaction.description}</td>
-                                                    <td className={transaction.type}>
-                                                        {transaction.type === 'expense' ? '-' : '+'}${parseFloat(transaction.amount).toFixed(2)}
-                                                    </td>
-                                                    <td style={{textTransform: 'capitalize'}}>{transaction.type}</td>
-                                                    <td>
+                                                <div className="t-row" key={transaction.id}>
+                                                    <div className="t-cell date" data-label="Date">{transaction.date}</div>
+                                                    <div className="t-cell description" data-label="Description">{transaction.description}</div>
+                                                    <div className="t-cell amount" data-label="Amount">
+                                                        <span className={transaction.type}>
+                                                            {transaction.type === 'expense' ? '-' : '+'}${parseFloat(transaction.amount).toFixed(2)}
+                                                        </span>
+                                                    </div>
+                                                    <div className="t-cell type" data-label="Type" style={{ textTransform: 'capitalize' }}>
+                                                        <span className={`badge ${transaction.type}-badge`}>{transaction.type}</span>
+                                                    </div>
+                                                    <div className="t-cell actions" data-label="Actions">
                                                         <div className="action-btns">
                                                             <button className="edit-btn" onClick={() => handleEdit(transaction)} title="Edit">
                                                                 <i className="fas fa-edit"></i>
@@ -842,11 +821,11 @@
                                                                 <i className="fas fa-trash"></i>
                                                             </button>
                                                         </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                </div>
                                             ))}
-                                        </tbody>
-                                    </table>
+                                        </div>
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="empty-state">
@@ -863,4 +842,5 @@
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
+
 </html>
