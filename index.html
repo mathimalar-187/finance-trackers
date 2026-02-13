@@ -498,12 +498,10 @@
             table th:last-child, table td:last-child {
                 min-width: 100px;
                 text-align: center;
-                /* On very small screens, remove sticky positioning so the action column
-                   doesn't overlap other columns and remains readable when wrapped */
-                position: static;
-                right: auto;
+                position: sticky;
+                right: 0;
                 background: white;
-                box-shadow: none;
+                box-shadow: -2px 0 4px rgba(0,0,0,0.05);
             }
 
             table thead th:last-child {
@@ -513,9 +511,7 @@
             .action-btns {
                 display: inline-flex;
                 gap: 3px;
-                /* Allow edit/delete buttons to wrap if needed on small screens */
-                flex-wrap: wrap;
-                width: 100%;
+                flex-wrap: nowrap;
                 justify-content: center;
             }
 
@@ -527,9 +523,7 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 5px;
-                width: 100%;
-            }
+                border-radius: 5px;            }
 
             .btn {
                 padding: 10px 15px;
